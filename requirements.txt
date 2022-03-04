@@ -1,0 +1,7 @@
+opencv-python
+tslearn
+networkx
+oss2
+pillow
+pandas
+loguru
