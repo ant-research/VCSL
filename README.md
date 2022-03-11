@@ -3,6 +3,19 @@
 This is the code for benchmarking segment-level video copy detection approaches
 with the Video Copy Segment Localization (VCSL) dataset.
 
+## Update in Mar, 2022
+2021-03-03: The paper was accepted by **CVPR 2022**! [Paper Link](https://arxiv.org/abs/2203.02654). 
+
+If the code is helpful for your work, please cite our paper
+```
+@article{he2022large,
+  title={A Large-scale Comprehensive Dataset and Copy-overlap Aware Evaluation Protocol for Segment-level Video Copy Detection},
+  author={He, Sifeng and Yang, Xudong and Jiang, Chen, et al.},
+  journal={arXiv preprint arXiv:2203.02654},
+  year={2022}
+}
+```
+
 ## Update in Jan, 2022
 - We release extracted frame features (RMAC, ViSiL, ViT, DINO) of all videos in VCSL (9207 in total).
 - We provide SPD pretrained models on RMAC, ViSiL, ViT, DINO features. 
