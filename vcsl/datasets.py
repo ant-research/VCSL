@@ -1,14 +1,24 @@
-import os
-import io
-import json
-import numpy as np
-from PIL import Image
-from typing import Sequence, List, Union, Dict, Tuple, Any, Callable
+#!/usr/bin/env python3
+# Copyright (c) Ant Group, Inc.
+"""
+Codes for [CVPR2022] VCSL paper [https://github.com/alipay/VCSL].
+Data wraping with torch-like Dataset classes
 
+Please cite the following publications if you plan to use our codes or the results for your research:
+{
+    1. He S, Yang X, Jiang C, et al. A Large-scale Comprehensive Dataset and Copy-overlap Aware Evaluation
+    Protocol for Segment-level Video Copy Detection[C]//Proceedings of the IEEE/CVF Conference on Computer
+    Vision and Pattern Recognition. 2022: 21086-21095.
+    2. Jiang C, Huang K, He S, et al. Learning segment similarity and alignment in large-scale content based
+    video retrieval[C]//Proceedings of the 29th ACM International Conference on Multimedia. 2021: 1618-1626.
+}
+@author: Sifeng He and Xudong Yang
+@email [sifeng.hsf@antgroup.com, jiegang.yxd@antgroup.com]
+
+"""
+
+from typing import Sequence, Callable
 from torch.utils.data import Dataset
-from loguru import logger
-
-import cv2
 import base64
 from .utils import *
 
@@ -97,26 +107,6 @@ class PairDataset(Dataset):
     def __len__(self):
         return len(self.pair_list) if self.pair_list else len(self.query_list) * len(self.gallery_list)
 
-
-class ImageItemDataset(ItemDataset):
-    def __init__(self,
-                 data_list: Sequence[Tuple[str, str]],
-                 root: str = "",
-                 transforms: List[Any] = None,
-                 store_type: str = StoreType.LOCAL.type_name,
-                 **kwargs):
-        super(ImageItemDataset, self).__init__(data_list,
-                                               root=root,
-                                               store_type=store_type,
-                                               data_type=DataType.IMAGE.type_name, **kwargs)
-        self.transforms = transforms
-
-    def __getitem__(self, item):
-        key, value = super().__getitem__(item)
-        if self.transforms:
-            for t in self.transforms:
-                value = t(value)
-        return key, value
 
 
 def inter_search(val: int, interval_list: List[int]):

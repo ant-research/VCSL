@@ -1,15 +1,32 @@
-import argparse
-import os
-import pandas as pd
-import numpy as np
-import json
+#!/usr/bin/env python3
+# Copyright (c) Ant Group, Inc.
+"""
+Codes for [CVPR2022] VCSL paper [https://github.com/alipay/VCSL].
+This is the script for obtaining copied segments (i.e., temporal alignment results) between video pairs.
+Before running this script, you need to go to run_video_sim.py file to get similarity map.
+The hyper-parameters in these vta(video temporal alignment) methods can be directly indicated or
+tuned by validation set of VCSL (recommend, details in run_video_vta_tune.py).
 
+Please cite the following publications if you plan to use our codes or the results for your research:
+{
+    1. He S, Yang X, Jiang C, et al. A Large-scale Comprehensive Dataset and Copy-overlap Aware Evaluation
+    Protocol for Segment-level Video Copy Detection[C]//Proceedings of the IEEE/CVF Conference on Computer
+    Vision and Pattern Recognition. 2022: 21086-21095.
+    2. Jiang C, Huang K, He S, et al. Learning segment similarity and alignment in large-scale content based
+    video retrieval[C]//Proceedings of the 29th ACM International Conference on Multimedia. 2021: 1618-1626.
+}
+@author: Sifeng He and Xudong Yang
+@email [sifeng.hsf@antgroup.com, jiegang.yxd@antgroup.com]
+"""
+
+
+import argparse
+import pandas as pd
 from vcsl import *
 from torch.utils.data import DataLoader
 from loguru import logger
-from itertools import product
+from itertools import product, islice
 
-from itertools import islice
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
@@ -28,7 +45,7 @@ if __name__ == '__main__':
     parser.add_argument("--output-root", type=str, help="output root")
     parser.add_argument("--output-store", type=str, help="store of output data: oss|local")
 
-    # offline algorithm hyper parameters
+    # Hyper parameters or input model
     parser.add_argument("--alignment-method", type=str, default="DTW", help="DTW, DP, TN alignment method")
 
     parser.add_argument("--min-length",  type=int, default=5, help="minimum length of one segment")
@@ -44,6 +61,11 @@ if __name__ == '__main__':
 
     parser.add_argument("--tn-top-K", type=int, default=5, help="top k nearest for TN")
     parser.add_argument("--tn-max-step", type=int, default=10, help="max step for TN")
+
+    parser.add_argument("--spd-model-path", type=str, help="SPD model path")
+    parser.add_argument("--device", type=str, help="cpu or cuda:0 or others, only valid to SPD inference")
+    parser.add_argument("--spd-conf-thres", type=float, default=0.5, help="bounding box conf filter for SPD inference")
+
 
     parser.add_argument("--params-file", type=str)
 
@@ -105,6 +127,10 @@ if __name__ == '__main__':
                             diagonal_thres=args.diagonal_thres)
     elif args.alignment_method.startswith('HV'):
         model_config = dict(min_sim=args.min_sim, iou_thresh=args.max_iou)
+    elif args.alignment_method.startswith('SPD'):
+        model_config = dict(model_path=args.spd_model_path,
+                            conf_thresh=args.spd_conf_thres,
+                            device=args.device)
     else:
         raise ValueError(f"Unknown VTA method: {args.alignment_method}")
 
@@ -130,5 +156,5 @@ if __name__ == '__main__':
     output_store = args.input_store if args.output_store is None else args.output_store
     if output_store == 'local' and not os.path.exists(args.output_root):
         os.makedirs(args.output_root, exist_ok=True)
-    writer = build_writer(output_store, DataType.JSON.type_name)
+    writer = build_writer(output_store, DataType.JSON.type_name, **config)
     writer.write(os.path.join(args.output_root, args.result_file), total_result)

@@ -1,0 +1,10 @@
+Features of all videos in VCSL
+
+DINO features (17.7G):
+https://drive.google.com/file/d/1xgEkfffw5wiFaSlpD8pAbht8eKiM9ljm/view?usp=sharing
+
+RMAC features (5.9G)
+https://drive.google.com/file/d/1L5uJUNvVshAqWA_2D8gkEnKK0pDuia-b/view?usp=sharing
+
+ViT features (8.87G)
+https://drive.google.com/file/d/12MFQkzNICn7z2J_JEsfFJlrra87Te3hv/view?usp=sharing

@@ -1,0 +1,13 @@
+SPD trained models on VCSL_train
+
+DINO:
+https://drive.google.com/file/d/1JygAzXIgKc3yBNu6IB-VMFIzmY8eBSGm/view?usp=sharing
+
+RMAC
+https://drive.google.com/file/d/1iDNDvHwc7x1Bxvpt7N1V6qm3GPP_h2Ma/view?usp=sharing
+
+Visil:
+https://drive.google.com/file/d/1_GxNCRcjfKkowrgA3dUNCtl6ln5DzfDD/view?usp=sharing
+
+ViT
+https://drive.google.com/file/d/1drcITxmJW11sVZFiUGrP6l9jcrAQOmB7/view?usp=sharing

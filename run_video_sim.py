@@ -1,13 +1,30 @@
-import argparse
-import os
-import pandas as pd
-import numpy as np
-import json
+#!/usr/bin/env python3
+# Copyright (c) Ant Group, Inc.
+"""
+Codes for [CVPR2022] VCSL paper [https://github.com/alipay/VCSL].
+This is the script for obtaining frame-to-frame similarity map between input video feature pairs.
+The similarity map is the common input for different temporal alignment methods.
+"input-root" in this script is the frame feature extracted from videos in data/videos_url_uuid.csv.
+We also provide the extracted features link in data/vcsl_features.txt
 
+Please cite the following publications if you plan to use our codes or the results for your research:
+{
+    1. He S, Yang X, Jiang C, et al. A Large-scale Comprehensive Dataset and Copy-overlap Aware Evaluation
+    Protocol for Segment-level Video Copy Detection[C]//Proceedings of the IEEE/CVF Conference on Computer
+    Vision and Pattern Recognition. 2022: 21086-21095.
+    2. Jiang C, Huang K, He S, et al. Learning segment similarity and alignment in large-scale content based
+    video retrieval[C]//Proceedings of the 29th ACM International Conference on Multimedia. 2021: 1618-1626.
+}
+@author: Sifeng He and Xudong Yang
+@email [sifeng.hsf@antgroup.com, jiegang.yxd@antgroup.com]
+"""
+
+
+import argparse
+import pandas as pd
 from vcsl import *
 from torch.utils.data import DataLoader
 from loguru import logger
-
 from itertools import islice
 
 
@@ -19,8 +36,8 @@ if __name__ == '__main__':
     parser.add_argument("--pair-file", type=str, help="data file")
     parser.add_argument("--data-file", type=str, help="data file")
 
-    parser.add_argument("--input-store", type=str, help="store of input data: oss|local", default="oss")
-    parser.add_argument("--input-root", type=str, help="root path of input data", default="")
+    parser.add_argument("--input-store", type=str, help="store of input feature data: oss|local", default="oss")
+    parser.add_argument("--input-root", type=str, help="root path of input feature data", default="")
 
     parser.add_argument("--oss-config", type=str, default='~/ossutilconfig-copyright', help="url path")
     parser.add_argument("--batch-size", "-b", type=int, default=32, help="batch size")

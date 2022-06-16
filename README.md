@@ -1,29 +1,20 @@
-# VCSL Benchmark
+# Video Copy Segment Localization (VCSL) dataset and benchmark [CVPR2022]
 
 This is the code for benchmarking segment-level video copy detection approaches
-with the Video Copy Segment Localization (VCSL) dataset.
+with the Video Copy Segment Localization (VCSL) dataset [**CVPR2022**]. [Paper Link](https://arxiv.org/abs/2203.02654).
+![vcsl](./figS2.png)
 
-## Update in Mar, 2022
-2021-03-03: The paper was accepted by **CVPR 2022**! [Paper Link](https://arxiv.org/abs/2203.02654). 
 
-If the code is helpful for your work, please cite our paper
-```
-@article{he2022large,
-  title={A Large-scale Comprehensive Dataset and Copy-overlap Aware Evaluation Protocol for Segment-level Video Copy Detection},
-  author={He, Sifeng and Yang, Xudong and Jiang, Chen, et al.},
-  journal={arXiv preprint arXiv:2203.02654},
-  year={2022}
-}
-```
+## Updates!!
+- 【2021-06-15】: We append 45k labelled copied video pairs `data/append_2022S1` to VCSL (+27% more data compared with original VCSL dataset with 167k copied video pairs).
+Although small part of video links are not available, we will keep adding labelled video data to VCSL continuously to maintain its large scale. 
+- 【2021-06-15】: We release extracted frame features `data/vcsl_features.txt` (RMAC, ViT, DINO) of all videos in VCSL (9207 in total). Due to the large size of ViSiL feature (400G+),
+we will not provide its public available link. You could go to [visil repo](https://github.com/MKLab-ITI/visil) and extract features by yourself.
+- 【2021-06-15】: SPD codes and the trained VTA models on RMAC, ViSiL, ViT, DINO features are all released in `data/spd_models.txt`.
+- 【2021-06-15】: We supplement the same amount of negative samples (27765 pairs) to `data/pair_file_test.csv` (55530 pairs in total now) to evaluate the
+algorithm performance more comprehensively. The metric and benchmark are also updated in the [arxiv version](https://arxiv.org/abs/2203.02654) of VCSL.
+- 【2021-03-03】: The paper was accepted by **CVPR 2022**!
 
-## Update in Jan, 2022
-- We release extracted frame features (RMAC, ViSiL, ViT, DINO) of all videos in VCSL (9207 in total).
-- We provide SPD pretrained models on RMAC, ViSiL, ViT, DINO features. 
-- The above features and models download links are contained in file `data/vcsl_features_spd_models.zip`.
-The unzipped password is the submission paper ID of VCSL.
-- We implement SPD code based on Yolov5 from this [page](https://github.com/ultralytics/yolov5). 
- A clean version will alo be provided and merged into this repo after the paper is accepted.
-- The solution of small part of invalid video links is referred to [here](#solution-to-invalid-links).
 
 ## Installation
 
@@ -80,8 +71,8 @@ from torchvision import transforms
 from vcsl import VideoFramesDataset
 from torch.utils.data import DataLoader
 
-# the video_frames.csv must contain columns described in Frame Sampling
-df = pd.read_csv("video_frames.csv")
+# the frames_all.csv must contain columns described in Frame Sampling
+df = pd.read_csv("frames_all.csv")
 data_list = df[['uuid', 'path', 'frame_count']].values.tolist()
 
 data_transforms = [
@@ -120,6 +111,8 @@ We recommend to put the features together as follows:
 ``` 
 where each file named as ${video_id}.npy represents a video feature.
 
+You can also directly use the extracted features provided in `data/vcsl_features.txt`.
+
 To compute the similarity map between videos, run
 ```bash
 bash scripts/test_video_sim.sh
@@ -150,10 +143,20 @@ bash scripts/test_video_vta.sh
 ```
  then you can see the final metric on the test set in the terminal outputs.
  
+### Metric
+We provide the following three evaluation metrics:
+- Overall segment-level precision/recall performance
+- Video-level FRR/FAR performance
+- Segment-level macro precision/recall performance on positive samples over query set
+
+We recommend using the first overall metric to reflect segment-level alignment accuracy, while it
+is also influenced by video-level results. Meanwhile, the second or third metrics can be utilized as
+an auxiliary metric from the perspective of intuitive video-level or only positive samples.
+ 
 ### Solution to invalid links
-- VCSL is originally constructed in mid-2021 and up to now (January 2022) around 8% urls are removed by video websites. 
-Although the available raw data are still far larger than other existing VCD datasets, we promise to adding labelled video 
-data to VCSL continuously (every six months or every year) to maintain its large scale. We hope this will make the dataset 
+- VCSL is originally constructed in mid-2021 and up to January 2022 around 8% urls are removed by video websites. 
+We will keep adding labelled video 
+data to VCSL continuously (every six months) to maintain its large scale. We hope this will make the dataset 
 valuable and usable for the community in the long term.
 - As to result reproducibility and fair comparison across methods, we release the features of all the videos including the 
 invalid ones and other necessary experiment details. Thus, one can reproduce the results reported in the paper. 
@@ -162,13 +165,33 @@ approaches by filtering out invalid data at that time.
 - For researchers whose interests are in video temporal alignment and other fields that do not depend on raw video data, 
 they can leverage the released features and annotations to develop new techniques on which the invalid videos will have no effect.
  
+## Cite VCSL
+If the code is helpful for your work, please cite our paper
+```
+@inproceedings{he2022large,
+  title={A Large-scale Comprehensive Dataset and Copy-overlap Aware Evaluation Protocol for Segment-level Video Copy Detection},
+  author={He, Sifeng and Yang, Xudong and Jiang, Chen and others},
+  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
+  pages={21086--21095},
+  year={2022}
+}
+@inproceedings{jiang2021learning,
+  title={Learning segment similarity and alignment in large-scale content based video retrieval},
+  author={Jiang, Chen and He, Sifeng and Yang, Xudong and others},
+  booktitle={Proceedings of the 29th ACM International Conference on Multimedia},
+  pages={1618--1626},
+  year={2021}
+}
+```
+ 
+ 
 ## License
 The code is released under MIT license
 
 ```bash
 MIT License
 
-Copyright (c) 2022 Alipay
+Copyright (c) 2021 Ant Group
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -188,4 +211,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ``` 
+
+
+ 
 

@@ -1,13 +1,29 @@
+#!/usr/bin/env python3
+# Copyright (c) Ant Group, Inc.
+"""
+Codes for [CVPR2022] VCSL paper [https://github.com/alipay/VCSL].
+This is the script for tuning the hyper-parameters in these vta(video temporal alignment) methods on
+validation set of VCSL.
+
+Please cite the following publications if you plan to use our codes or the results for your research:
+{
+    1. He S, Yang X, Jiang C, et al. A Large-scale Comprehensive Dataset and Copy-overlap Aware Evaluation
+    Protocol for Segment-level Video Copy Detection[C]//Proceedings of the IEEE/CVF Conference on Computer
+    Vision and Pattern Recognition. 2022: 21086-21095.
+    2. Jiang C, Huang K, He S, et al. Learning segment similarity and alignment in large-scale content based
+    video retrieval[C]//Proceedings of the 29th ACM International Conference on Multimedia. 2021: 1618-1626.
+}
+@author: Sifeng He and Xudong Yang
+@email [sifeng.hsf@antgroup.com, jiegang.yxd@antgroup.com]
+"""
+
+
 import argparse
 import os
 import pandas as pd
-import numpy as np
-import json
-
 from vcsl import *
 from torch.utils.data import DataLoader
 from loguru import logger
-
 from itertools import islice, product
 
 
@@ -187,7 +203,7 @@ def eval_all(args):
 
         result_dict = {i['name']: i for i in result_list}
 
-        r, p, cnt = evaluate(result_dict, pair_group_dict)
+        r, p, cnt = evaluate_macro(result_dict, pair_group_dict)
         f1 = 2 * r * p / (r + p)
         logger.info(f"Hyper params {idx}: {param}")
         logger.info(

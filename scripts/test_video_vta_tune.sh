@@ -1,13 +1,16 @@
 #!/usr/bin/env bash
 
-FEAT=dino_base_ps8_i224
+FEAT=dino
 VTA=DTW
-DATASET=bili211015
+DATASET=VCSL
 DATE=21112318
+
+# Before executing following script, similarity maps need to be calculated by test_video_sim.sh, and
+# similarity maps are put in the same folder as the following "--input-root".
 
 python run_video_vta_tune.py \
         --pair-file data/pair_file_val.csv \
-        --input-root result/vcsl/video/sim/${FEAT}/${DATASET}/ \
+        --input-root result/sim/${FEAT}/${DATASET}/ \
         --input-store local \
         --batch-size 32 \
         --data-workers 32 \
@@ -26,7 +29,7 @@ python run_video_vta_tune.py \
 
 python run_video_vta.py \
         --pair-file data/pair_file_test.csv \
-        --input-root result/vcsl/video/sim/${FEAT}/${DATASET}/ \
+        --input-root result/sim/${FEAT}/${DATASET}/ \
         --input-store local \
         --batch-size 32 \
         --data-workers 32 \
