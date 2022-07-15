@@ -1,5 +1,8 @@
 SPD trained models on VCSL_train
 
+ISC:
+https://drive.google.com/file/d/1jfLEqG50iSsS64mONRrhBaP0udJ6xF7T/view?usp=sharing
+
 DINO:
 https://drive.google.com/file/d/1JygAzXIgKc3yBNu6IB-VMFIzmY8eBSGm/view?usp=sharing
 

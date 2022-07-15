@@ -6,6 +6,8 @@ with the Video Copy Segment Localization (VCSL) dataset [**CVPR2022**]. [Paper L
 
 
 ## Updates!!
+- 【2021-07-15】: SOTA frame features (1st Place Solution of the Facebook AI Image Similarity Challenge [repo](https://github.com/lyakaap/ISC21-Descriptor-Track-1st)) are extracted and available in `data/vcsl_features.txt`.
+This feature achieves best performance on VCSL [benchmark](#Benchmark) with even more compact dimension (256d). We recommend to evaluate your video copy localization algorithm with this frame feature (marked as ISC).
 - 【2021-06-15】: We append 45k labelled copied video pairs `data/append_2022S1` to VCSL (+27% more data compared with original VCSL dataset with 167k copied video pairs).
 Although small part of video links are not available, we will keep adding labelled video data to VCSL continuously to maintain its large scale. 
 - 【2021-06-15】: We release extracted frame features `data/vcsl_features.txt` (RMAC, ViT, DINO) of all videos in VCSL (9207 in total). Due to the large size of ViSiL feature (400G+),
@@ -152,6 +154,19 @@ We provide the following three evaluation metrics:
 We recommend using the first overall metric to reflect segment-level alignment accuracy, while it
 is also influenced by video-level results. Meanwhile, the second or third metrics can be utilized as
 an auxiliary metric from the perspective of intuitive video-level or only positive samples.
+ 
+### Benchmark
+After executing the above several steps, the overall segment-level precision/recall performance of video 
+copy localization algorithms (with ISC frame feature as example) is indicated below:
+
+| Performance | Recall  | Precision |  Fscore |
+| :-----| :----: | :----: | :----:  |
+| HV | 86.94  | 36.83 | 51.73 |
+| TN | 75.25  | 51.80 | 61.36 |
+| DP | 49.48  | 60.61 | 54.48 |
+| DTW | 45.10  | 56.67 | 50.23 |
+| SPD | 56.49  | 68.60 | 61.96 |
+
  
 ### Solution to invalid links
 - VCSL is originally constructed in mid-2021 and up to January 2022 around 8% urls are removed by video websites. 
