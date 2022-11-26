@@ -6,16 +6,17 @@ with the Video Copy Segment Localization (VCSL) dataset [**CVPR2022**]. [Paper L
 
 
 ## Updates!!
-- 【2021-07-15】: SOTA frame features (1st Place Solution of the Facebook AI Image Similarity Challenge [repo](https://github.com/lyakaap/ISC21-Descriptor-Track-1st)) are extracted and available in `data/vcsl_features.txt`.
+- 【2022-11-25】: Our recent work **TransVCL** was accepted by AAAI2023 ([Paper Link](https://arxiv.org/abs/2211.13090), [Code Link](https://github.com/transvcl/TransVCL)). TransVCL is a novel network with joint optimization of multiple components for segment-level video copy detection. It achieves the state-of-the-art performance on VCSL benchmark.
+- 【2022-07-15】: SOTA frame features (1st Place Solution of the Facebook AI Image Similarity Challenge [repo](https://github.com/lyakaap/ISC21-Descriptor-Track-1st)) are extracted and available in `data/vcsl_features.txt`.
 This feature achieves best performance on VCSL [benchmark](#Benchmark) with even more compact dimension (256d). We recommend to evaluate your video copy localization algorithm with this frame feature (marked as ISC).
-- 【2021-06-15】: We append 45k labelled copied video pairs `data/append_2022S1` to VCSL (+27% more data compared with original VCSL dataset with 167k copied video pairs).
+- 【2022-06-15】: We append 45k labelled copied video pairs `data/append_2022S1` to VCSL (+27% more data compared with original VCSL dataset with 167k copied video pairs).
 Although small part of video links are not available, we will keep adding labelled video data to VCSL continuously to maintain its large scale. 
-- 【2021-06-15】: We release extracted frame features `data/vcsl_features.txt` (RMAC, ViT, DINO) of all videos in VCSL (9207 in total). Due to the large size of ViSiL feature (400G+),
+- 【2022-06-15】: We release extracted frame features `data/vcsl_features.txt` (RMAC, ViT, DINO) of all videos in VCSL (9207 in total). Due to the large size of ViSiL feature (400G+),
 we will not provide its public available link. You could go to [visil repo](https://github.com/MKLab-ITI/visil) and extract features by yourself.
-- 【2021-06-15】: SPD codes and the trained VTA models on RMAC, ViSiL, ViT, DINO features are all released in `data/spd_models.txt`.
-- 【2021-06-15】: We supplement the same amount of negative samples (27765 pairs) to `data/pair_file_test.csv` (55530 pairs in total now) to evaluate the
+- 【2022-06-15】: SPD codes and the trained VTA models on RMAC, ViSiL, ViT, DINO features are all released in `data/spd_models.txt`.
+- 【2022-06-15】: We supplement the same amount of negative samples (27765 pairs) to `data/pair_file_test.csv` (55530 pairs in total now) to evaluate the
 algorithm performance more comprehensively. The metric and benchmark are also updated in the [arxiv version](https://arxiv.org/abs/2203.02654) of VCSL.
-- 【2021-03-03】: The paper was accepted by **CVPR 2022**!
+- 【2022-03-03】: The paper was accepted by **CVPR 2022**!
 
 
 ## Installation
