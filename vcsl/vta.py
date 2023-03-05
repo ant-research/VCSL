@@ -475,6 +475,7 @@ def njit_dp_matrix(sim_mat: np.ndarray, discontinue: int=3, min_sim: float=0) ->
                 dp_mat[i, j] = max_value
     return dp_mat, accu_unmatch_mat, back_trace_mat
 
+
 def dp(sim_matrix: np.ndarray, discontinue: int = 3, min_sim: float = 1., ave_sim: float = 1.3, min_length: int = 5,
        diagonal_thres: int = 30) -> List[List[int]]:
     """
@@ -526,6 +527,7 @@ def dp(sim_matrix: np.ndarray, discontinue: int = 3, min_sim: float = 1., ave_si
         cnt -= 1
 
     return result_list
+
 
 def tn(sims: np.ndarray,
        tn_max_step: int = 10, tn_top_k: int = 5, max_path: int = 10,
