@@ -6,6 +6,8 @@ with the Video Copy Segment Localization (VCSL) dataset [**CVPR2022**]. [Paper L
 
 
 ## Updates!!
+- 【2023-03-05】: We append 11k labelled copied video pairs `data/append_202301` to VCSL, the corresponding ISC features can be found in `data/vcsl_features.txt`.
+- 【2023-03-05】: We updated the dataset by removing duplicate video pairs (~1%), the benchmark results are updated accordingly.
 - 【2022-11-25】: Our recent work **TransVCL** was accepted by AAAI2023 ([Paper Link](https://arxiv.org/abs/2211.13090), [Code Link](https://github.com/transvcl/TransVCL)). TransVCL is a novel network with joint optimization of multiple components for segment-level video copy detection. It achieves the state-of-the-art performance on VCSL benchmark.
 - 【2022-07-15】: SOTA frame features (1st Place Solution of the Facebook AI Image Similarity Challenge [repo](https://github.com/lyakaap/ISC21-Descriptor-Track-1st)) are extracted and available in `data/vcsl_features.txt`.
 This feature achieves best performance on VCSL [benchmark](#Benchmark) with even more compact dimension (256d). We recommend to evaluate your video copy localization algorithm with this frame feature (marked as ISC).
@@ -162,12 +164,13 @@ copy localization algorithms (with ISC frame feature as example) is indicated be
 
 | Performance | Recall  | Precision |  Fscore |
 | :-----| :----: | :----: | :----:  |
-| HV | 86.94  | 36.83 | 51.73 |
-| TN | 75.25  | 51.80 | 61.36 |
-| DP | 49.48  | 60.61 | 54.48 |
-| DTW | 45.10  | 56.67 | 50.23 |
-| SPD | 56.49  | 68.60 | 61.96 |
+| HV | 86.84  | 36.48 | 51.37 |
+| TN | 62.17  | 66.11 | 64.08 |
+| DP | 49.22  | 60.16 | 54.14 |
+| DTW | 44.74  | 56.19 | 49.82 |
+| SPD | 71.19  | 55.44 | 62.34 |
 
+- This table is updated in March 05, 2023, using the updated test set. The parameters used to reproduce the numbers are provided in `data/benchmark_parameters.txt`. 
  
 ### Solution to invalid links
 - VCSL is originally constructed in mid-2021 and up to January 2022 around 8% urls are removed by video websites. 

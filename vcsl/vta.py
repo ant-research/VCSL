@@ -841,8 +841,7 @@ class DtwModel(BaseVtaModel):
         func = partial(dtw,
                        discontinue=self.discontinue,
                        min_sim=self.min_sim,
-                       min_length=self.min_length,
-                       max_iou=self.max_iou)
+                       min_length=self.min_length)
 
         super(DtwModel, self).__init__(concurrency=concurrency, func_to_run=func)
 
