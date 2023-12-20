@@ -6,6 +6,7 @@ with the Video Copy Segment Localization (VCSL) dataset [**CVPR2022**]. [Paper L
 
 
 ## Updates!!
+- 【2023-12-20】: We append 90k labelled video pairs `data/append_202312` to VCSL, the corresponding ISC features can be found in `data/vcsl_features.txt`.
 - 【2023-03-05】: We append 11k labelled video pairs `data/append_202301` to VCSL, the corresponding ISC features can be found in `data/vcsl_features.txt`.
 - 【2023-03-05】: We updated the dataset by removing duplicate video pairs (~1%), the benchmark results are updated accordingly.
 - 【2022-11-25】: Our recent work **TransVCL** was accepted by AAAI2023 ([Paper Link](https://arxiv.org/abs/2211.13090), [Code Link](https://github.com/transvcl/TransVCL)). TransVCL is a novel network with joint optimization of multiple components for segment-level video copy detection. It achieves the state-of-the-art performance on VCSL benchmark.
