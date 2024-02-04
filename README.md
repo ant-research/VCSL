@@ -172,7 +172,17 @@ copy localization algorithms (with ISC frame feature as example) is indicated be
 | SPD | 71.19  | 55.44 | 62.34 |
 
 - This table is updated in March 05, 2023, using the updated test set. The parameters used to reproduce the numbers are provided in `data/benchmark_parameters.txt`. 
- 
+
+| Performance | Recall  | Precision |  Fscore |
+| :-----| :----: | :----: | :----:  |
+| HV | 86.94  | 36.82 | 51.73 |
+| TN | 62.49  | 66.50 | 64.43 |
+| DP | 49.56  | 60.63 | 54.53 |
+| DTW | 45.10  | 56.67 | 50.23 |
+| SPD | 71.47  | 56.27 | 62.97 |
+
+- This table shows the results on the original test set.
+
 ### Solution to invalid links
 - VCSL is originally constructed in mid-2021 and up to January 2022 around 8% urls are removed by video websites. 
 We will keep adding labelled video 
